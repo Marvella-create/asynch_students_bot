@@ -1,12 +1,16 @@
 import asyncio
 import random
+import os
+from dotenv import load_dotenv
 from aiogram import Bot, Dispatcher, F, types
 from aiogram.filters import Command
-from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup, KeyboardButton
+from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, KeyboardButton, ReplyKeyboardMarkup
+
+load_dotenv()
 
 # --- CONFIG ---
-API_TOKEN = "8710835662:AAE5PxMa3r2iSKAB9EavIoC8e839y2JZV5E"
-MY_ID = 133724864
+API_TOKEN = os.getenv("API_TOKEN")
+MY_ID = int(os.getenv("MY_ID", "133724864"))
 
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher()
@@ -90,7 +94,7 @@ async def handle_sentences(message: types.Message):
     await message.answer("Got it! Maria will check it soon. Keep it up! ✨")
 
 async def main():
-    print("STUDENT BOT STARTED")
+    print("STUDENT BOT STARTED WITH SAFE CONFIG")
     await dp.start_polling(bot)
 
 if __name__ == "__main__":
